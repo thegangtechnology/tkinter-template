@@ -1,5 +1,5 @@
 import tkinter as tk
-from typing import Optional, Generic, List, Callable, TypeVar
+from typing import Optional, Generic, List, Callable, TypeVar, Sequence
 
 T = TypeVar('T')
 
@@ -51,3 +51,24 @@ class GenericVar(Generic[T]):
 
     def trace_add(self, cb: Callable):
         self._callbacks.append(cb)
+
+class SerialVerticalGridPlacer:
+    def __init__(self, row=0, col=0):
+        self.row = row
+        self.col = col
+
+    def place(self, widget: tk.Widget):
+        widget.grid(row=self.row)
+        self.row+=1
+
+    def place_all(self, widgets: Sequence[tk.Widget]):
+        for w in widgets:
+            self.place(w)
+
+    def place_stretch(self, widget: tk.Widget):
+        GridPlacer.stretch_x(widget, row=self.row, column=self.col)
+        self.row += 1
+
+    def place_stretch_all(self, widgets:  Sequence[tk.Widget]):
+        for w in widgets:
+            self.place_stretch(w)

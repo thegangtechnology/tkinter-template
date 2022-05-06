@@ -9,23 +9,28 @@ from matplotlib.backends.backend_tkagg import (
 from matplotlib.figure import Figure
 
 from tkinter_template.states import RandomizerState
-from tkinter_template.utils import GridPlacer
+from tkinter_template.utils import GridPlacer, SerialVerticalGridPlacer
 
 
 class RandomizerSideBar(tk.Frame):
     def __init__(self, root: tk.BaseWidget, **kwds):
         super().__init__(root, **kwds)
+        gp = SerialVerticalGridPlacer()
+        self.mean_label = ttk.Label(self, text='Mean')
         self.mean_entry = ttk.Scale(self, from_=-5, to=5)
-        self.mean_entry.grid(row=0)
+        gp.place_all([self.mean_label,self.mean_entry])
 
+
+        self.width_label = ttk.Label(self, text='Width')
         self.width_entry = ttk.Scale(self, from_=-2, to=2)
-        self.width_entry.grid(row=1)
+        gp.place_all([self.width_label, self.width_entry])
 
+        self.n_label = ttk.Label(self, text='N')
         self.n_entry = ttk.Scale(self, from_=5, to=5000, value=5)
-        self.n_entry.grid(row=2)
+        gp.place_all([self.n_label, self.n_entry])
 
-        self.do_it_button = ttk.Button(self, text='hello')
-        self.do_it_button.grid(row=3)
+        self.do_it_button = ttk.Button(self, text='Random')
+        gp.place(self.do_it_button)
 
     def subscribe(self, st: RandomizerState):
         self.mean_entry.config(variable=st.mean)
