@@ -4,6 +4,7 @@ color = 'red'
 
 
 def main():
+    global color
     app = tk.Tk()
 
     label = tk.Label(app, text='here', bg=color)
