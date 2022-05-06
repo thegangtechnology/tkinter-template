@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+from tkinter_template.components.motion_capture import MotionCapture
 from tkinter_template.components.progress import Progress
 from tkinter_template.components.randomizer import Randomizer
 from tkinter_template.components.string_concatenator import StringConcatenator
@@ -22,7 +23,12 @@ class MainTab(ttk.Notebook):
         self.progress.pack()
         self.add(self.progress, text='Progress')
 
+        self.motion_capture = MotionCapture(self)
+        self.motion_capture.pack()
+        self.add(self.motion_capture, text="Event Capture")
+
     def subscribe(self, st: State):
         self.sc.subscribe(st.concatenator_state)
         self.randomizer.subscribe(st.randomizer_state)
         self.progress.subscribe(st.progress_state)
+        self.motion_capture.subscribe(st.motion_capture_state)

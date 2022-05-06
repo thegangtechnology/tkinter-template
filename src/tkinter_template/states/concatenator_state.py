@@ -33,8 +33,8 @@ class ConcatenatorState:
         # computed (not computedVar doesn't work like tkinter variable (can't be bind like internal tkvariable)
         # it can be used to bind with non variable prop
 
-    def get_full_string(self, prefix: StringVar, suffix: StringVar) -> str:
-        return 'short' + prefix.get() + suffix.get()
+    def get_full_string(self, prefix: str, suffix: str) -> str:
+        return 'short' + prefix + suffix
 
     def get_color(self, *args) -> str:
         t = len(self.prefix.get()) > len(self.suffix.get())

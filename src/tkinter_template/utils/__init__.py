@@ -34,8 +34,8 @@ class GridPlacer:
 
 
 class GenericVar(Generic[T]):
-    def __init__(self):
-        self.value: Optional[T] = None
+    def __init__(self, value:Optional[T]=None):
+        self.value: Optional[T] = value
         self._callbacks: List[Callable] = []
 
     def get(self) -> T:

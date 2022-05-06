@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -38,6 +39,11 @@ class RandomizerSideBar(tk.Frame):
         self.n_entry.config(variable=st.n)
         self.do_it_button.config(command=st.do_randomize)
 
+class MPLCanvas(FigureCanvasTkAgg):
+    def __init__(self, master, figsize: Tuple[int, int]=(5,4), dpi=100,**kwds):
+        figure = Figure(figsize=figsize, dpi=dpi)
+        super().__init__(figure, master, **kwds)
+
 
 class Randomizer(tk.Frame):
     def __init__(self, root: tk.BaseWidget, **kwds):
@@ -46,10 +52,12 @@ class Randomizer(tk.Frame):
         self.sidebar = RandomizerSideBar(self)
         GridPlacer.stretch_y(self.sidebar, row=0, column=0, sticky='n')
 
-        fig = Figure(figsize=(5, 4), dpi=100)
-        self.canvas = FigureCanvasTkAgg(fig, master=self)
+        self.canvas = MPLCanvas(self)
         GridPlacer.stretch_both(self.canvas.get_tk_widget(), row=0, column=1)
-        self.canvas.draw_idle()
+
+        self.click_label = ttk.Label(self)
+        GridPlacer.stretch_x(self.click_label, row=1, column=1)
+
 
     def refresh_figure(self):
         self.canvas.draw_idle()
@@ -58,3 +66,6 @@ class Randomizer(tk.Frame):
         self.sidebar.subscribe(st)
         st.fig.set(self.canvas.figure)
         st.fig.trace_add(self.refresh_figure)
+        # https://matplotlib.org/stable/users/explain/event_handling.html
+        self.canvas.mpl_connect('button_press_event', st.on_click)
+        self.click_label.config(textvariable=st.event)

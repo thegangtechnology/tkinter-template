@@ -1,4 +1,4 @@
-from tkinter import DoubleVar, IntVar
+from tkinter import DoubleVar, IntVar, StringVar
 
 import numpy as np
 from matplotlib.figure import Figure
@@ -11,6 +11,8 @@ class RandomizerState:
         self.mean = DoubleVar(value=3)
         self.width = DoubleVar(value=2)
         self.n = IntVar(value=100)
+
+        self.event  = StringVar()
 
         self.data: GenericVar[np.ndarray] = GenericVar()
         self.fig: GenericVar[Figure] = GenericVar()
@@ -29,3 +31,6 @@ class RandomizerState:
         figure.clear()
         figure.add_subplot(111).hist(self.data.get())
         self.fig.trigger()
+
+    def on_click(self, ev):
+        self.event.set(f'(x,y): {ev.x},{ev.y} | (xdata,ydata): {ev.xdata},{ev.ydata} ')
