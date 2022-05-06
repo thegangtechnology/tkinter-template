@@ -26,7 +26,7 @@ class RandomizerState:
         self.make_hist()
 
     def make_hist(self):
-        # All these for the fact that tkagg canvas doesn't support assignment of fig..??
+        # All these for the fact that tkagg canvas doesn't support reassignment of fig..??
         figure: Figure = self.fig.get()
         figure.clear()
         figure.add_subplot(111).hist(self.data.get())
