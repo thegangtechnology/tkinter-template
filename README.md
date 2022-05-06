@@ -3,5 +3,5 @@
 ```shell
 poetry shell
 poetry install
-python -m tkinter_tempalte
+python -m tkinter_template
 ```
