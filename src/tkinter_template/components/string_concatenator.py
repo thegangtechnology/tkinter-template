@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, StringVar
+from tkinter import ttk
 
 from tkinter_template.states import ConcatenatorState
 from tkinter_template.utils import GridPlacer as gp

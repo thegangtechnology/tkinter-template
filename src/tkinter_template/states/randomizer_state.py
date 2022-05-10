@@ -12,7 +12,7 @@ class RandomizerState:
         self.width = DoubleVar(value=2)
         self.n = IntVar(value=100)
 
-        self.event  = StringVar()
+        self.event = StringVar()
 
         self.data: GenericVar[np.ndarray] = GenericVar()
         self.fig: GenericVar[Figure] = GenericVar()

@@ -34,7 +34,7 @@ class GridPlacer:
 
 
 class GenericVar(Generic[T]):
-    def __init__(self, value:Optional[T]=None):
+    def __init__(self, value: Optional[T] = None):
         self.value: Optional[T] = value
         self._callbacks: List[Callable] = []
 
@@ -52,6 +52,7 @@ class GenericVar(Generic[T]):
     def trace_add(self, cb: Callable):
         self._callbacks.append(cb)
 
+
 class SerialVerticalGridPlacer:
     def __init__(self, row=0, col=0):
         self.row = row
@@ -59,7 +60,7 @@ class SerialVerticalGridPlacer:
 
     def place(self, widget: tk.Widget):
         widget.grid(row=self.row)
-        self.row+=1
+        self.row += 1
 
     def place_all(self, widgets: Sequence[tk.Widget]):
         for w in widgets:
@@ -69,6 +70,6 @@ class SerialVerticalGridPlacer:
         GridPlacer.stretch_x(widget, row=self.row, column=self.col)
         self.row += 1
 
-    def place_stretch_all(self, widgets:  Sequence[tk.Widget]):
+    def place_stretch_all(self, widgets: Sequence[tk.Widget]):
         for w in widgets:
             self.place_stretch(w)

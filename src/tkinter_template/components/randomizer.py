@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from typing import Tuple
 
-import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg
 )
@@ -19,8 +17,7 @@ class RandomizerSideBar(tk.Frame):
         gp = SerialVerticalGridPlacer()
         self.mean_label = ttk.Label(self, text='Mean')
         self.mean_entry = ttk.Scale(self, from_=-5, to=5)
-        gp.place_all([self.mean_label,self.mean_entry])
-
+        gp.place_all([self.mean_label, self.mean_entry])
 
         self.width_label = ttk.Label(self, text='Width')
         self.width_entry = ttk.Scale(self, from_=-2, to=2)
@@ -39,8 +36,9 @@ class RandomizerSideBar(tk.Frame):
         self.n_entry.config(variable=st.n)
         self.do_it_button.config(command=st.do_randomize)
 
+
 class MPLCanvas(FigureCanvasTkAgg):
-    def __init__(self, master, figsize: Tuple[int, int]=(5,4), dpi=100,**kwds):
+    def __init__(self, master, figsize: Tuple[int, int] = (5, 4), dpi=100, **kwds):
         figure = Figure(figsize=figsize, dpi=dpi)
         super().__init__(figure, master, **kwds)
 
@@ -57,7 +55,6 @@ class Randomizer(tk.Frame):
 
         self.click_label = ttk.Label(self)
         GridPlacer.stretch_x(self.click_label, row=1, column=1)
-
 
     def refresh_figure(self):
         self.canvas.draw_idle()

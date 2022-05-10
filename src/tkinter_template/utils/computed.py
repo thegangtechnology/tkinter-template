@@ -3,10 +3,13 @@ from typing import Callable, Tuple, TypeVar, Generic, List
 
 T = TypeVar('T')
 
+
 def bind_to_prop(widget: Widget, prop_name: str, var: Variable):
     def write_prop(*args):
-        widget.config(**{prop_name: var.get()}) # this gives some validation
+        widget.config(**{prop_name: var.get()})  # this gives some validation
+
     var.trace_add('write', write_prop)
+
 
 class ComputedMixin:
     def update(self, *args):
@@ -50,7 +53,8 @@ class ComputedIntVar(IntVar, ComputedMixin):
         for arg in args:
             self.subscribe(arg)
 
-class Computed(Generic[T], ComputedMixin): # doesn't have all the cool stuff Variable has though
+
+class Computed(Generic[T], ComputedMixin):  # doesn't have all the cool stuff Variable has though
     def __init__(self, args: Tuple, f: Callable, auto_get=True, **kwds):
         self.args = args
         self.f = f
