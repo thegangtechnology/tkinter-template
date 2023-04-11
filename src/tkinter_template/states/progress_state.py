@@ -1,6 +1,6 @@
 import time
 import tkinter
-from collections import Callable
+from typing import Callable
 from threading import Thread
 from tkinter import IntVar, StringVar
 
