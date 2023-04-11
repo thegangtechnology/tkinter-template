@@ -49,7 +49,7 @@ class GenericVar(Generic[T]):
         for cb in self._callbacks:
             cb()
 
-    def trace_add(self, cb: Callable):
+    def trace_add(self, mode: str, cb: Callable):
         self._callbacks.append(cb)
 
 

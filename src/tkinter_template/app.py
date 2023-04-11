@@ -1,7 +1,7 @@
 import tkinter as tk
 
 from tkinter_template.components.maintab import MainTab
-from tkinter_template.config.config import Config
+from tkinter_template.config import Config
 from tkinter_template.states import State
 from tkinter_template.utils import GridPlacer as gp
 

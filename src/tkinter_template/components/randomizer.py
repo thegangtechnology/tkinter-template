@@ -62,7 +62,7 @@ class Randomizer(tk.Frame):
     def subscribe(self, st: RandomizerState):
         self.sidebar.subscribe(st)
         st.fig.set(self.canvas.figure)
-        st.fig.trace_add(self.refresh_figure)
+        st.fig.trace_add('write', self.refresh_figure)
         # https://matplotlib.org/stable/users/explain/event_handling.html
         self.canvas.mpl_connect('button_press_event', st.on_click)
         self.click_label.config(textvariable=st.event)

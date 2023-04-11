@@ -1,5 +1,6 @@
-from tkinter_template.config.config import Config
+from tkinter_template.config import Config
 from tkinter_template.states.concatenator_state import ConcatenatorState
+from tkinter_template.states.jmespath_state import JmesPathState
 from tkinter_template.states.many_string_state import ManyStringState
 from tkinter_template.states.motion_capture_state import MotionCaptureState
 from tkinter_template.states.progress_state import ProgressState
@@ -13,3 +14,4 @@ class State:
         self.progress_state = ProgressState()
         self.motion_capture_state = MotionCaptureState()
         self.many_string_state = ManyStringState(config.variables)
+        self.jmes_path_state = JmesPathState()
