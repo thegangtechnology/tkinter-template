@@ -24,7 +24,7 @@ class TextExtension(Frame):
         self._text_variable = None
         self._setup_textvariable(textvariable)
 
-    def _setup_textvariable(self, textvariable):
+    def _setup_textvariable(self, textvariable: Variable):
         if textvariable is not None:
             if not (isinstance(textvariable, Variable)):
                 raise TypeError(

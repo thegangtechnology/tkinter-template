@@ -3,7 +3,7 @@ import json
 from tkinter import StringVar, BooleanVar
 
 import jmespath
-from jmespath.exceptions import ParseError
+from jmespath.exceptions import ParseError, JMESPathError
 from tkinter_template.utils import GenericVar
 from tkinter_template.utils.computed import Computed, ComputedStringVar
 
@@ -36,21 +36,22 @@ class JmesPathState:
         self.str_database: ComputedStringVar = ComputedStringVar((self.database,), f=to_json)
         self.str_result: ComputedStringVar = ComputedStringVar((self.result,), f=to_json)
         self.bg_color = ComputedStringVar((self.parse_status,), lambda st: 'green' if st else 'red')
+        self.error_text = StringVar(value='')
 
     def load_file(self, fname: str):
         with open(fname) as f:
             data = json.load(f)
             self.database.set(data)
 
-    def live_compute(self, print_error=False):
+    def live_compute(self):
         try:
+            self.error_text.set('')
             self.compute_result()
             self.parse_status.set(True)
-
-        except ParseError as e:
+            self.error_text.set('OK')
+        except JMESPathError as e:
             self.parse_status.set(False)
-            if print_error:
-                print(e)
+            self.error_text.set(str(e))
 
     def compute_result(self):
         if len(self.jmes_path.get()) != 0:
